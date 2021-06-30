@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { Bar } from "react-chartjs-2";
+import Chats from "./chats";
 import { getCovidStat, changeErr } from "../../../reducers/HomeReducer";
 import Spinner from "../../Spinner/Spinner";
 import { dataHome, optionHome } from "./chart_data";
@@ -12,7 +13,10 @@ const selectTopDeath = createSelector(
   (data) => {
     console.log("calc death data...");
     return data
-      ? [...data].sort((a, b) => b.totalDeath - a.totalDeath).slice(1, 16)
+      ? dataHome(
+          [...data].sort((a, b) => b.totalDeath - a.totalDeath).slice(1, 16),
+          "totalDeath"
+        )
       : null;
   }
 );
@@ -27,6 +31,8 @@ const selectTopCases = createSelector(
       : null;
   }
 );
+
+const dataOpt = optionHome("Total Death");
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -49,22 +55,7 @@ const Home = () => {
       Corona virus danger
       <div className="w-50 mx-auto text-center position-relative">
         {loading && <Spinner />}
-        {topTenDeath && (
-          <>
-            <Bar
-              data={dataHome(topTenDeath, "totalDeath")}
-              options={optionHome("Total Death")}
-              type
-              redraw={false}
-            />
-            <br />
-            <Bar
-              data={dataHome(topTenCases, "totalCases")}
-              options={optionHome("Total Cases")}
-              type
-            />
-          </>
-        )}
+        <Chats data={topTenDeath} opt={dataOpt} />
         <button type="button" onClick={() => dispatch(changeErr())}>
           error
         </button>
