@@ -21,16 +21,16 @@ const selectTopDeath = createSelector(
   }
 );
 
-const selectTopCases = createSelector(
-  // @ts-ignore
-  (state) => state.home.data,
-  (data) => {
-    console.log("calc cases data...");
-    return data
-      ? [...data].sort((a, b) => b.totalCases - a.totalCases).slice(1, 16)
-      : null;
-  }
-);
+// const selectTopCases = createSelector(
+//   // @ts-ignore
+//   (state) => state.home.data,
+//   (data) => {
+//     console.log("calc cases data...");
+//     return data
+//       ? [...data].sort((a, b) => b.totalCases - a.totalCases).slice(1, 16)
+//       : null;
+//   }
+// );
 
 const dataOpt = optionHome("Total Death");
 
@@ -42,7 +42,7 @@ const Home = () => {
   }, [dispatch]);
 
   const topTenDeath = useSelector(selectTopDeath);
-  const topTenCases = useSelector(selectTopCases);
+  // const topTenCases = useSelector(selectTopCases);
   // @ts-ignore
   const data = useSelector((state) => state.home.data);
   // @ts-ignore
