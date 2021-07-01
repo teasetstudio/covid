@@ -14,12 +14,15 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [acn1, setAcn1] = useState<string>("active"); // assumes link 1 is default active
   const [acn2, setAcn2] = useState<string>("");
+  const [acn3, setAcn3] = useState<string>("");
 
   const startChangeVis = (id: string): void => {
     setAcn1("");
     setAcn2("");
+    setAcn3("");
     if (id === "a") setAcn1("active");
     else if (id === "b") setAcn2("active");
+    else setAcn3("active");
   };
 
   const toggle = () => setIsOpen(!isOpen);
@@ -39,15 +42,26 @@ const Header = () => {
                     startChangeVis("a");
                   }}
                 >
-                  Home
+                  World
                 </Link>
               </NavItem>
               <NavItem>
                 <Link
                   className={`nav-link ${acn2}`}
-                  to="/countries/"
+                  to="/top10/"
                   onClick={() => {
                     startChangeVis("b");
+                  }}
+                >
+                  Top 10
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link
+                  className={`nav-link ${acn3}`}
+                  to="/countries/"
+                  onClick={() => {
+                    startChangeVis("c");
                   }}
                 >
                   Countries
