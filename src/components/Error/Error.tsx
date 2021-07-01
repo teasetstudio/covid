@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeErr } from "../../../reducers/HomeReducer";
+import { changeErr } from "../../reducers/HomeReducer";
 
 const Error = () => {
+  console.log("error");
   const dispatch = useDispatch();
+
   // @ts-ignore
   const loading = useSelector((state) => state.home.loading);
   // @ts-ignore
