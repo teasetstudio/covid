@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import HomeReducer from "./HomeReducer";
-import CountriesReducer from "./CountriesReducer";
+import CountryReducer from "./CountryReducer";
 
 export default combineReducers({
   home: HomeReducer,
-  countries: CountriesReducer,
+  country: CountryReducer,
 });

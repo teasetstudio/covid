@@ -3,7 +3,7 @@ import axios from "axios";
 // transform functions
 function toNumber(num: string) {
   if (!num || num === "") {
-    return "N/D";
+    return null;
   }
   return +num.replace(/[^+\d]/g, "");
 }

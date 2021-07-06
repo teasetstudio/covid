@@ -27,6 +27,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    "no-console": "off",
     "linebreak-style": "off",
     "prettier/prettier": [
       "error",
