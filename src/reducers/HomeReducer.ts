@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import hash from "object-hash";
 import CountriesApi from "../api/countries";
-import { setInfo } from "./CountryReducer";
 
 // REDUCER
 interface IState {
@@ -71,7 +70,6 @@ export const getCovidStat = createAsyncThunk(
         } else {
           console.log("got new data");
           dispatch(gotInfo(res.data));
-          dispatch(setInfo(res.data));
         }
       })
 

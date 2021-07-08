@@ -1,6 +1,8 @@
-export const dataHome = (data: any, param: string) => {
-  const labels = data.map((i: any) => i.country);
-  const dataValue = data.map((i: any) => i[param]);
+import { Tdata } from "../../../../types";
+
+export const dataHome = (data: Tdata[], param: keyof Tdata) => {
+  const labels = data.map((i) => i.country);
+  const dataValue = data.map((i) => i[param]);
 
   return {
     labels,

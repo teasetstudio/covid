@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
 import { Spinner } from "reactstrap";
 import { getCovidStat } from "../../../reducers/HomeReducer";
 import useSortableData from "./useSortableData";
+import { RootState } from "../../../reducers/store";
 import Error from "../../Error/Error";
 import sortImg from "./sort-down.svg";
+import { Tdata } from "../../../types";
 import "./countries.scss";
 
 // RESELECT FUNCTION (GET REDUX DATA and sort it)
 const selectCountries = createSelector(
-  // @ts-ignore
-  (state) => state.home.data,
+  (state: RootState) => state.home.data,
   (data) => {
     console.log("calc countries data...");
     return data && [...data].sort((a, b) => b.totalCases - a.totalCases);
@@ -28,18 +29,14 @@ function niceNum(num: number) {
 // Countries COMPONENT
 const Countries = () => {
   const dispatch = useDispatch();
-  // @ts-ignore
-  const reduxData: any[] = useSelector(selectCountries);
+  const reduxData = useSelector(selectCountries);
+  const loading = useSelector((state: RootState) => state.home.loading);
+  const error = useSelector((state: RootState) => state.home.error);
 
   // SORTING COMPONENT
   const { sortedItems, requestSort, sortConfig } = useSortableData(reduxData);
 
-  const data = sortedItems || reduxData;
-
-  // @ts-ignore
-  const loading = useSelector((state) => state.home.loading);
-  // @ts-ignore
-  const error = useSelector((state) => state.home.error);
+  const data: Tdata[] = sortedItems || reduxData;
 
   useEffect(() => {
     dispatch(getCovidStat());
@@ -60,7 +57,7 @@ const Countries = () => {
         className="alert alert-dark d-flex justify-content-between align-items-center text-center mt-4 mb-2 position-relative"
         role="alert"
       >
-        <span className="w-25 text-start">Country</span>
+        <span className="w-25 text-left">Country</span>
         <span className="w-25">
           <button
             type="button"
@@ -91,7 +88,7 @@ const Countries = () => {
             />
           </button>
         </span>
-        <span className="w-25 text-end">
+        <span className="w-25 text-right">
           <button
             type="button"
             onClick={() => requestSort("totalRecovered")}
@@ -107,24 +104,24 @@ const Countries = () => {
           </button>
         </span>
 
-        {loading && <Spinner className="position-absolute" />}
+        {loading && <Spinner color="secondary" className="position-absolute" />}
       </div>
 
       <ul className="list-group list-group-flush text-center">
         {data &&
-          data.map((i: any) => (
+          data.map((i) => (
             <li
               className="d-flex justify-content-between list-group-item"
               key={i.country ? i.country : "aa"}
             >
-              <b className="w-25 text-start">{i.country}</b>
+              <b className="w-25 text-left">{i.country}</b>
               <span className="w-25">
                 {i.totalCases ? niceNum(i.totalCases) : "N/D"}
               </span>
               <span className="w-25">
                 {i.totalDeath ? niceNum(i.totalDeath) : "N/D"}
               </span>
-              <span className="w-25 text-end">
+              <span className="w-25 text-right">
                 {i.totalRecovered ? niceNum(i.totalRecovered) : "N/D"}
               </span>
             </li>
