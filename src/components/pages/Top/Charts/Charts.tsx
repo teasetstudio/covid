@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../../../../reducers/store";
+import { RootState } from "reducers/store";
 import { dataHome, optionHome } from "./chart_data";
 
 const selectTopDeath = createSelector(

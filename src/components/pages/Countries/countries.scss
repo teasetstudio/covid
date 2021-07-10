@@ -7,3 +7,10 @@
 .descending{
   transform: rotate(180deg);
 }
+
+// TableHeader compoment
+.search-img{
+  top: 6px;
+  right: 10px;
+  pointer-events: none;
+}

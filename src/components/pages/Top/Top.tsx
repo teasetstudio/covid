@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "reactstrap";
-import { getCovidStat } from "../../../reducers/HomeReducer";
-import { RootState } from "../../../reducers/store";
-import Error from "../../Error/Error";
+import { getCovidStat } from "reducers/HomeReducer";
+import { RootState } from "reducers/store";
+import Error from "components/Error/Error";
 import Charts from "./Charts/Charts";
 
 const Top = () => {

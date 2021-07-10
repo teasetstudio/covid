@@ -1,4 +1,4 @@
-import { Tdata } from "../../../../types";
+import { Tdata } from "types";
 
 const dataHome = (data: Tdata) => {
   const activeCases = data.totalCases - data.totalRecovered - data.totalDeath;

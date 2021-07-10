@@ -1,4 +1,4 @@
-import { Tdata } from "../../../../types";
+import { Tdata } from "types";
 
 export const dataHome = (data: Tdata[], param: keyof Tdata) => {
   const labels = data.map((i) => i.country);

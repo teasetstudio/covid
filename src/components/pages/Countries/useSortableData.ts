@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Tdata } from "../../../types";
+import { Tdata } from "types";
 
-interface IConfig {
+export interface IConfig {
   key: keyof Tdata;
   direction: string;
 }
 
-const useSortableData = (items: Tdata[], config: IConfig | null = null) => {
+const useSortableData = (
+  items: Tdata[] | null,
+  config: IConfig | null = null
+) => {
   const [sortConfig, setSortConfig] = useState(config);
 
   const sortedItems = React.useMemo(() => {

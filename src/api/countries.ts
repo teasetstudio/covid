@@ -8,7 +8,9 @@ function toNumber(num: string) {
   return +num.replace(/[^+\d]/g, "");
 }
 
-function transorm(country: any) {
+type TdataNoTransform = { [key: string]: string };
+
+function transorm(country: TdataNoTransform) {
   return {
     activeCases: toNumber(country["Active Cases_text"]),
     country: country.Country_text,
@@ -30,7 +32,7 @@ const instance = axios.create({
   },
   transformResponse: [
     (data) => {
-      return JSON.parse(data).map((i: any) => transorm(i));
+      return JSON.parse(data).map((i: TdataNoTransform) => transorm(i));
     },
   ],
 });

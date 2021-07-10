@@ -1,16 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import hash from "object-hash";
-import CountriesApi from "../api/countries";
+import CountriesApi from "api/countries";
+import { Tdata } from "types";
 
 // REDUCER
 interface IState {
-  data: any;
+  data: Tdata[] | null;
   loading: boolean;
+  search: string;
   error: boolean;
 }
 const initialState: IState = {
   data: null,
   loading: true,
+  search: "",
   error: false,
 };
 
@@ -34,26 +37,24 @@ const HomeReducer = createSlice({
       state.loading = false;
       state.error = true;
     },
+    setSearch(state, { payload }) {
+      state.search = payload;
+    },
     changeErr(state) {
       state.error = !state.error;
     },
   },
-  // extraReducers: {
-  //   [getCovidStat.pending]: (state) => {
-  //     state.loading = true;
-  //   },
-  //   [getCovidStat.fulfilled]: (state, action) => {
-  //     state.data = action.payload;
-  //   },
-  //   [getCovidStat.rejected]: (state) => {
-  //     state.error = true;
-  //   },
-  // },
 });
 
 export default HomeReducer.reducer;
-export const { gettingInfo, gotInfo, gotSameInfo, gotErr, changeErr } =
-  HomeReducer.actions;
+export const {
+  gettingInfo,
+  gotInfo,
+  gotSameInfo,
+  gotErr,
+  setSearch,
+  changeErr,
+} = HomeReducer.actions;
 
 // async functions
 export const getCovidStat = createAsyncThunk(

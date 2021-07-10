@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "reactstrap";
-import { changeErr } from "../../reducers/HomeReducer";
-import { RootState } from "../../reducers/store";
+import { changeErr } from "reducers/HomeReducer";
+import { RootState } from "reducers/store";
 
 const Error = () => {
   console.log("error");
